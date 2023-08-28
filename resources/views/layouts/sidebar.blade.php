@@ -1,10 +1,8 @@
  <!-- Main Sidebar Container -->
  <aside class="main-sidebar sidebar-dark-primary elevation-4">
      <!-- Brand Logo -->
-     <a href="index3.html" class="brand-link">
-         <img src="{{ url('dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
-             style="opacity: .8">
-         <span class="brand-text font-weight-light">AdminLTE 3</span>
+     <a href="#" class="brand-link">
+         <span class="brand-text font-weight-bold text-center">School Mgt. System</span>
      </a>
 
      <!-- Sidebar -->
@@ -25,7 +23,7 @@
                  data-accordion="false">
                  @if (Auth::user()->user_type == 1)
                      <li class="nav-item">
-                         <a href="{{ url('admin/dashboard') }}" class="nav-link">
+                         <a href="{{ url('admin/dashboard') }}" class="nav-link  @if( Request::segment(2) == 'dashboard') active @endif">
                              <i class="nav-icon fas fa-tachometer-alt"></i>
                              <p>
                                  Dashboard
@@ -33,7 +31,7 @@
                          </a>
                      </li>
                      <li class="nav-item">
-                         <a href="{{ url('admin/admin/list') }}" class="nav-link">
+                         <a href="{{ url('admin/admin/list') }}" class="nav-link @if( Request::segment(2) == 'admin') active @endif">
                              <i class="nav-icon far fa-user"></i>
                              <p>
                                  Admin
@@ -42,7 +40,7 @@
                      </li>
                  @elseif (Auth::user()->user_type == 2)
                      <li class="nav-item">
-                         <a href="{{ url('teacher/dashboard') }}" class="nav-link">
+                         <a href="{{ url('teacher/dashboard') }}" class="nav-link @if( Request::segment(2) == 'dashboard') active @endif">
                              <i class="nav-icon fas fa-tachometer-alt"></i>
                              <p>
                                  Dashboard
@@ -51,7 +49,7 @@
                      </li>
                  @elseif (Auth::user()->user_type == 3)
                      <li class="nav-item">
-                         <a href="{{ url('student/dashboard') }}" class="nav-link">
+                         <a href="{{ url('student/dashboard') }}" class="nav-link @if( Request::segment(2) == 'dashboard') active @endif">
                              <i class="nav-icon fas fa-tachometer-alt"></i>
                              <p>
                                  Dashboard
@@ -60,7 +58,7 @@
                      </li>
                  @elseif (Auth::user()->user_type == 4)
                      <li class="nav-item">
-                         <a href="{{ url('parent/dashboard') }}" class="nav-link">
+                         <a href="{{ url('parent/dashboard') }}" class="nav-link @if( Request::segment(2) == 'dashboard') active @endif">
                              <i class="nav-icon fas fa-tachometer-alt"></i>
                              <p>
                                  Dashboard
@@ -68,9 +66,6 @@
                          </a>
                      </li>
                  @endif
-
-                 <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
 
                  <li class="nav-item">
                      <a href="{{ route('logout') }}" class="nav-link">
