@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ForgetPasswordMail;
 use App\Models\User;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Hash;
+use Str;
 
 class AuthController extends Controller
 {
@@ -63,15 +66,44 @@ class AuthController extends Controller
         return view('auth.forgot-password');
     }
 
-    public function resetPassword(Request $request)
+    public function forgotPasswordPost(Request $request)
     {
-        $user = User::getEmailSingle($request->email);
+        $user = User::getSingleEmail($request->email);
         if (!empty($user)) {
+            $user->remember_token = Str::random(30);
+            $user->save();
+            Mail::to($user->email)->send(new ForgetPasswordMail($user));
+            return redirect()->back()->with('success', 'Please check your email and reset your password!');
         } else {
             return redirect()->back()->with('error', 'Email not found!');
         }
     }
 
+    public function resetPassword($token)
+    {
+        $user = User::getSingleToken($token);
+        if (!empty($token)) {
+            $data['user'] = $user;
+            return view('auth.reset-password', $data);
+        } else {
+            abort(404);
+        }
+    }
+    public function resetPasswordPost($token, Request $request)
+    {
+        if ($request->password == $request->confirm_password) {
+            $user = User::getSingleToken($token);
+            if (!$user) {
+                return redirect()->back()->with('error', 'Token does not exist');
+            }
+            $user->password = Hash::make($request->passowrd);
+            $user->remember_token = Str::random(30);
+            $user->save();
+            return redirect(url(''))->with('success', 'Password successfully reset.');
+        } else {
+            return redirect()->back()->with('error', 'Passwords do not match!');
+        }
+    }
     public function logout()
     {
         Auth::logout();

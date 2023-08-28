@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Kush SMA | Forgot Password</title>
+    <title>Kush SMA | Reset Password</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
@@ -22,18 +22,25 @@
         <!-- /.login-logo -->
         <div class="card card-outline card-primary">
             <div class="card-header text-center">
-                <a href="#" class="h3"><b>SMA </b>Forgot Password</a>
+                <a href="#" class="h3"><b>SMA </b>Reset Password</a>
             </div>
             <div class="card-body">
-                <p class="login-box-msg">Please provide your email.</p>
+                <p class="login-box-msg">Please provide your new password</p>
 
                 @include('_message')
-
-                <form action="{{ route('forgot-password-post') }}" method="post">
+                <form action="{{ url("reset-password-post/$user->remember_token") }}" method="post">
                     {{ csrf_field() }}
 
                     <div class="input-group mb-3">
-                        <input type="email" class="form-control" required name="email" placeholder="Email">
+                        <input type="password" class="form-control" required name="password" placeholder="Password">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-envelope"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="password" class="form-control" required name="confirm_password" placeholder="Confirm Password">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-envelope"></span>
@@ -43,8 +50,8 @@
 
                     <!-- /.col -->
                     <div class="row d-flex justify-content-center align-items-center">
-                        <div class="col-8">
-                            <button type="submit" class="btn btn-primary btn-block">New Password</button>
+                        <div class="col-4">
+                            <button type="submit" class="btn btn-primary btn-block">Reset</button>
                         </div>
                         <div class="col-4">
                             <button type="button" class="btn btn-secondary btn-block ">   <a href="{{ route('login.page') }}" class="text-white">Login</a></button>
