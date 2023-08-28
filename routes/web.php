@@ -15,9 +15,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [AuthController::class, 'login']);
+Route::get('/', [AuthController::class, 'login'])->name('login.page');
 Route::post('login', [AuthController::class, 'authLogin'])->name('login');
 Route::get('logout', [AuthController::class, 'logout'])->name('logout');
+Route::get('forgot-password', [AuthController::class, 'forgetPassword'])->name('forgot-password');
+Route::post('reset-password', [AuthController::class, 'resetPassword'])->name('reset-password');
 
 
 Route::get('/admin/admin/list', function () {

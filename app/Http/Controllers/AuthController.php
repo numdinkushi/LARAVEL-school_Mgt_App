@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
@@ -54,6 +55,20 @@ class AuthController extends Controller
             }
         } else {
             return redirect()->back()->with('error', 'Invalid credentials');
+        }
+    }
+
+    public function forgetPassword()
+    {
+        return view('auth.forgot-password');
+    }
+
+    public function resetPassword(Request $request)
+    {
+        $user = User::getEmailSingle($request->email);
+        if (!empty($user)) {
+        } else {
+            return redirect()->back()->with('error', 'Email not found!');
         }
     }
 
