@@ -19,7 +19,9 @@ Route::get('/', [AuthController::class, 'login'])->name('login.page');
 Route::post('login', [AuthController::class, 'authLogin'])->name('login');
 Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('forgot-password', [AuthController::class, 'forgetPassword'])->name('forgot-password');
-Route::post('reset-password', [AuthController::class, 'resetPassword'])->name('reset-password');
+Route::post('forgot-password', [AuthController::class, 'forgotPasswordPost'])->name('forgot-password-post');
+Route::get('reset-password/{token}', [AuthController::class, 'resetPassword'])->name('reset-password');
+Route::post('reset-password-post/{token}', [AuthController::class, 'resetPasswordPost'])->name('reset-password-post');
 
 
 Route::get('/admin/admin/list', function () {
