@@ -49,6 +49,10 @@ class AdminController extends Controller
 
     public function updateAdmin($id, Request $request)
     {
+        $request->validate([
+            'email' => 'required|email|unique:users,email,' . $id
+        ]);
+
         $user = User::getSingleAdmin($id);
         $user->name = trim($request->name);
         $user->email = trim($request->email);
