@@ -54,7 +54,7 @@ class ClassController extends Controller
     public function delete($id)
     {
         $user = ClassRoom::getSingleClass($id);
-        $user->is_delete = 1;
+        $user->is_delete = '1';
         $user->save();
 
         return redirect('admin/class/list')->with('success', 'Class successfully deleted');

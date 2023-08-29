@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ClassController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\SubjectController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -42,6 +43,14 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('admin/class/edit/{id}', [ClassController::class, 'edit'])->name('admin.class.edit');
     Route::post('admin/class/edit/{id}', [ClassController::class, 'update'])->name('admin.class.update');
     Route::get('admin/class/delete/{id}', [ClassController::class, 'delete'])->name('admin.class.delete');
+
+    //subjects
+    Route::get('admin/subject/list', [SubjectController::class, 'list'])->name('admin.subject-list');
+    Route::get('admin/subject/add', [SubjectController::class, 'add'])->name('admin.subject.add');
+    Route::post('admin/subject/store', [SubjectController::class, 'store'])->name('admin.subject.store');
+    Route::get('admin/subject/edit/{id}', [SubjectController::class, 'edit'])->name('admin.subject.edit');
+    Route::post('admin/subject/edit/{id}', [SubjectController::class, 'update'])->name('admin.subject.update');
+    Route::get('admin/subject/delete/{id}', [SubjectController::class, 'delete'])->name('admin.subject.delete');
 });
 
 Route::group(['middleware' => 'teacher'], function () {
