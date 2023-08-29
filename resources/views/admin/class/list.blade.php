@@ -69,7 +69,7 @@
                                     <td>{{ $class->id }}</td>
                                     <td>{{ $class->name }}</td>
                                     <td>
-                                       @if ($class->status == 0)
+                                       @if ($class->status == 1)
                                           Active
                                        @else
                                           Inactive

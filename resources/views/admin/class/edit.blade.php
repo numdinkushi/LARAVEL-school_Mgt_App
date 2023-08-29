@@ -22,8 +22,8 @@
                                          <div class="form-group">
                                              <label>Status</label>
                                              <select class="form-control" name="status" id="">
-                                                <option {{ $singleClass->status == 0 ? 'selected' : '' }} value="0">Active</option>
-                                                <option {{ $singleClass->status == 1 ? 'selected' : '' }} value="1">Inactive</option>
+                                                <option {{ $singleClass->status == 1 ? 'selected' : '' }} value="1">Active</option>
+                                                <option {{ $singleClass->status == 0 ? 'selected' : '' }} value="0">Inactive</option>
                                              </select>
                                          </div>
                                      </div>
